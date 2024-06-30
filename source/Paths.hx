@@ -6,7 +6,7 @@ import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
 import lime.utils.Assets;
 import flixel.FlxSprite;
-#if MODS_ALLOWED
+#if sys
 import sys.io.File;
 import sys.FileSystem;
 import flixel.graphics.FlxGraphic;
@@ -138,26 +138,16 @@ class Paths
 
 	static public function video(key:String)
 	{
-		#if MODS_ALLOWED
-		var file:String = modsVideo(key);
-		if(FileSystem.exists(file)) {
-			return file;
-		}
-		#end
+		return Generic.returnPath() + 'assets/videos/$key.$VIDEO_EXT';
+	}
+
+	static public function _video(key:String)
+	{
 		return 'assets/videos/$key.$VIDEO_EXT';
 	}
 
 	static public function sound(key:String, ?library:String):Dynamic
 	{
-		#if MODS_ALLOWED
-		var file:String = modsSounds(key);
-		if(FileSystem.exists(file)) {
-			if(!customSoundsLoaded.exists(file)) {
-				customSoundsLoaded.set(file, Sound.fromFile(file));
-			}
-			return customSoundsLoaded.get(file);
-		}
-		#end
 		return getPath('sounds/$key.$SOUND_EXT', SOUND, library);
 	}
 	
@@ -168,59 +158,24 @@ class Paths
 
 	inline static public function music(key:String, ?library:String):Dynamic
 	{
-		#if MODS_ALLOWED
-		var file:String = modsMusic(key);
-		if(FileSystem.exists(file)) {
-			if(!customSoundsLoaded.exists(file)) {
-				customSoundsLoaded.set(file, Sound.fromFile(file));
-			}
-			return customSoundsLoaded.get(file);
-		}
-		#end
 		return getPath('music/$key.$SOUND_EXT', MUSIC, library);
 	}
 
 	inline static public function voices(song:String):Any
 	{
-		#if MODS_ALLOWED
-		var file:Sound = returnSongFile(modsSongs(song.toLowerCase().replace(' ', '-') + '/Voices'));
-		if(file != null) {
-			return file;
-		}
-		#end
+		
 		return 'songs:assets/songs/${song.toLowerCase().replace(' ', '-')}/Voices.$SOUND_EXT';
 	}
 
 	inline static public function inst(song:String):Any
 	{
-		#if MODS_ALLOWED
-		var file:Sound = returnSongFile(modsSongs(song.toLowerCase().replace(' ', '-') + '/Inst'));
-		if(file != null) {
-			return file;
-		}
-		#end
+		
 		return 'songs:assets/songs/${song.toLowerCase().replace(' ', '-')}/Inst.$SOUND_EXT';
 	}
 
-	#if MODS_ALLOWED
-	inline static private function returnSongFile(file:String):Sound
-	{
-		if(FileSystem.exists(file)) {
-			if(!customSoundsLoaded.exists(file)) {
-				customSoundsLoaded.set(file, Sound.fromFile(file));
-			}
-			return customSoundsLoaded.get(file);
-		}
-		return null;
-	}
-	#end
-
 	inline static public function image(key:String, ?library:String):Dynamic
 	{
-		#if MODS_ALLOWED
-		var imageToReturn:FlxGraphic = addCustomGraphic(key);
-		if(imageToReturn != null) return imageToReturn;
-		#end
+	
 		return getPath('images/$key.png', IMAGE, library);
 	}
 	
@@ -257,11 +212,6 @@ class Paths
 
 	inline static public function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false, ?library:String)
 	{
-		#if MODS_ALLOWED
-		if(FileSystem.exists(mods(currentModDirectory + '/' + key)) || FileSystem.exists(mods(key))) {
-			return true;
-		}
-		#end
 		
 		if(OpenFlAssets.exists(Paths.getPath(key, type))) {
 			return true;
@@ -271,32 +221,16 @@ class Paths
 
 	inline static public function getSparrowAtlas(key:String, ?library:String)
 	{
-		#if MODS_ALLOWED
-		var imageLoaded:FlxGraphic = addCustomGraphic(key);
-		var xmlExists:Bool = false;
-		if(FileSystem.exists(modsXml(key))) {
-			xmlExists = true;
-		}
-
-		return FlxAtlasFrames.fromSparrow((imageLoaded != null ? imageLoaded : image(key, library)), (xmlExists ? File.getContent(modsXml(key)) : file('images/$key.xml', library)));
-		#else
+		
 		return FlxAtlasFrames.fromSparrow(image(key, library), file('images/$key.xml', library));
-		#end
+		
 	}
 
 	inline static public function getPackerAtlas(key:String, ?library:String)
 	{
-		#if MODS_ALLOWED
-		var imageLoaded:FlxGraphic = addCustomGraphic(key);
-		var txtExists:Bool = false;
-		if(FileSystem.exists(modsTxt(key))) {
-			txtExists = true;
-		}
-
-		return FlxAtlasFrames.fromSpriteSheetPacker((imageLoaded != null ? imageLoaded : image(key, library)), (txtExists ? File.getContent(modsTxt(key)) : file('images/$key.txt', library)));
-		#else
+		
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
-		#end
+	
 	}
 
 	inline static public function formatToSongPath(path:String) {
