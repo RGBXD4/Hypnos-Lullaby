@@ -10,7 +10,10 @@ import flixel.input.actions.FlxActionSet;
 import flixel.input.gamepad.FlxGamepadButton;
 import flixel.input.gamepad.FlxGamepadInputID;
 import flixel.input.keyboard.FlxKey;
-
+#if mobile
+import mobile.flixel.FlxButton;
+import mobile.flixel.FlxHitbox;
+#end
 #if (haxe >= "4.0.0")
 enum abstract Action(String) to String from String
 {
@@ -379,6 +382,41 @@ class Controls extends FlxActionSet
 	}
 	#end
 
+		#if mobile
+public var trackedInputsNOTES:Array<FlxActionInput> = [];
+
+public function addButtonNOTES(action:FlxActionDigital, button:FlxButton, state:FlxInputState)
+{
+var input:FlxActionInputDigitalIFlxInput = new FlxActionInputDigitalIFlxInput(button, state);
+trackedInputsNOTES.push(input);
+action.add(input);
+}
+
+public function setHitBox(hitbox:FlxHitbox)
+{
+    inline forEachBound(Control.NOTE_UP, (action, state) -> addButtonNOTES(action, hitbox.buttons[2], state));
+    inline forEachBound(Control.NOTE_DOWN, (action, state) -> addButtonNOTES(action, hitbox.buttons[1], state));
+    inline forEachBound(Control.NOTE_LEFT, (action, state) -> addButtonNOTES(action, hitbox.buttons[0], state));
+    inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addButtonNOTES(action, hitbox.buttons[3], state));
+}
+public function removeFlxInput(Tinputs) {
+		for (action in this.digitalActions)
+		{
+			var i = action.inputs.length;
+			
+			while (i-- > 0)
+			{
+				var input = action.inputs[i];
+
+				var x = Tinputs.length;
+				while (x-- > 0)
+					if (Tinputs[x] == input)
+						action.remove(input);
+			}
+		}
+}
+#end
+
 	override function update()
 	{
 		super.update();
@@ -580,34 +618,20 @@ class Controls extends FlxActionSet
 	 */
 	public function bindKeys(control:Control, keys:Array<FlxKey>)
 	{
-		var copyKeys:Array<FlxKey> = keys.copy();
-		for (i in 0...copyKeys.length) {
-			if(i == NONE) copyKeys.remove(i);
-		}
-
 		#if (haxe >= "4.0.0")
-		inline forEachBound(control, (action, state) -> addKeys(action, copyKeys, state));
+		inline forEachBound(control, (action, state) -> addKeys(action, keys, state));
 		#else
-		forEachBound(control, function(action, state) addKeys(action, copyKeys, state));
-		#end
+		forEachBound(control, function(action, state) addKeys(action, keys, state));
+		#end	
 	}
 
-	/**
-	 * Sets all actions that pertain to the binder to trigger when the supplied keys are used.
-	 * If binder is a literal you can inline this
-	 */
 	public function unbindKeys(control:Control, keys:Array<FlxKey>)
 	{
-		var copyKeys:Array<FlxKey> = keys.copy();
-		for (i in 0...copyKeys.length) {
-			if(i == NONE) copyKeys.remove(i);
-		}
-
 		#if (haxe >= "4.0.0")
-		inline forEachBound(control, (action, _) -> removeKeys(action, copyKeys));
+		inline forEachBound(control, (action, _) -> removeKeys(action, keys));
 		#else
-		forEachBound(control, function(action, _) removeKeys(action, copyKeys));
-		#end
+		forEachBound(control, function(action, _) removeKeys(action, keys));
+		#end		
 	}
 
 	inline static function addKeys(action:FlxActionDigital, keys:Array<FlxKey>, state:FlxInputState)
