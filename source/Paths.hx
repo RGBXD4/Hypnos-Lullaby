@@ -301,7 +301,7 @@ class Paths
 		return path.toLowerCase().replace(' ', '-');
 	}
 	
-	#if (MODS_ALLOWED && sys)
+	#if (MODS_ALLOWED || sys)
 	static public function addCustomGraphic(key:String):FlxGraphic {
 		if(FileSystem.exists(modsImages(key))) {
 			if(!customImagesLoaded.exists(key)) {
