@@ -881,6 +881,10 @@ class PlayState extends MusicBeatState
 				camFollow.x = 510;
 				camFollow.y = 358;
 		} 
+		#if mobile
+		addMobileControls();
+		mobileControls.visible= true;
+		#end
 		
 	}
 
