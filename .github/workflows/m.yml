@@ -29,17 +29,17 @@ jobs:
         with:
           haxe-version: 4.2.5
 
-    - name: Setup Java
-      uses: actions/setup-java@v3
-      with:
-      java-version: '11'
-      distribution: 'zulu'
+      - name: Setup Java JDK
+        uses: actions/setup-java@main
+        with:
+          distribution: 'zulu'
+          java-version: 11
 
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
-      with:
-      ndk-version: '21.4.7075529'
-      cmake-version: '3.22.1'
+      - name: Setup Android NDK
+        uses: nttld/setup-ndk@main
+        id: setup-ndk
+        with:
+          ndk-version: r15c
       
       - name: Restore Previous Cache
         id: cache-debug-build-android-restore
