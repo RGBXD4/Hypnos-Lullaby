@@ -13,7 +13,12 @@ import flixel.util.FlxColor;
 import flixel.util.FlxGradient;
 import flixel.FlxState;
 import flixel.FlxBasic;
-
+#if mobile
+import mobile.MobileControls;
+import flixel.FlxCamera;
+import flixel.input.actions.FlxActionInput;
+import flixel.util.FlxDestroyUtil;
+#end
 class MusicBeatState extends FlxUIState
 {
 	private var lastBeat:Float = 0;
@@ -25,6 +30,55 @@ class MusicBeatState extends FlxUIState
 
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
+
+	#if mobile
+		var mobileControls:MobileControls;
+		var trackedInputsMobileControls:Array<FlxActionInput> = [];
+
+		public function addMobileControls()
+	        {
+			if (mobileControls != null)
+			removeMobileControls();
+			mobileControls = new MobileControls();
+
+			controls.setHitBox(mobileControls.hitbox);
+
+			trackedInputsMobileControls = controls.trackedInputsNOTES;
+			controls.trackedInputsNOTES = [];
+
+			var camControls:FlxCamera = new FlxCamera();
+			FlxG.cameras.add(camControls, false);
+			camControls.bgColor.alpha = 0;
+
+			mobileControls.cameras = [camControls];
+			mobileControls.visible = true;
+			add(mobileControls);
+		}
+
+	public function removeMobileControls()
+		{
+			if (trackedInputsMobileControls.length > 0)
+			controls.removeFlxInput(trackedInputsMobileControls);
+
+			if (mobileControls != null)
+			remove(mobileControls);
+		}
+
+		#end
+
+	override function destroy()
+	{
+		#if android
+		if (trackedInputsMobileControls.length > 0)
+		controls.removeFlxInput(trackedInputsMobileControls);
+		#end
+		super.destroy();
+		#if android
+		if (mobileControls != null)
+		mobileControls = FlxDestroyUtil.destroy(mobileControls);
+		#end
+
+	}
 
 	override function create() {
 		var skip:Bool = FlxTransitionableState.skipNextTransOut;
