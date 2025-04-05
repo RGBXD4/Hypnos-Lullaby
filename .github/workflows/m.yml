@@ -43,8 +43,8 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
-          haxelib git hxcpp https://github.com/mcagabe19-stuff/hxcpp
-          haxelib git lime https://github.com/mcagabe19-stuff/lime-8.2.2.git
+          haxelib install hxcpp 4.2.1
+          haxelib install lime 7.9.0
           haxelib install openfl 9.1.0
           haxelib install flixel-ui
           haxelib install flixel 5.2.1
