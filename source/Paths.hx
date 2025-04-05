@@ -300,8 +300,8 @@ class Paths
 	inline static public function formatToSongPath(path:String) {
 		return path.toLowerCase().replace(' ', '-');
 	}
-	
-	#if (MODS_ALLOWED || sys)
+	#if sys
+	#if MODS_ALLOWED
 	static public function addCustomGraphic(key:String):FlxGraphic {
 		if(FileSystem.exists(modsImages(key))) {
 			if(!customImagesLoaded.exists(key)) {
@@ -362,4 +362,5 @@ class Paths
 		return Sys.getCwd() + 'mods/' + key;
 	}
 	#end
+		#end
 }
