@@ -28,6 +28,18 @@ jobs:
         uses: krdlab/setup-haxe@38fd78cc3a7960b281cf4a33a63a9c1543ac4598
         with:
           haxe-version: 4.2.5
+
+      - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+      java-version: '11'
+      distribution: 'zulu'
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+      with:
+      ndk-version: '21.4.7075529'
+      cmake-version: '3.22.1'
       
       - name: Restore Previous Cache
         id: cache-debug-build-android-restore
