@@ -30,7 +30,7 @@ class FlxHitbox extends FlxSpriteGroup
 			for (i in 0...4)
 		        {
 			add(buttons[i] = createHint(i * width, 0, width, height, colors[i]));
-			add(buttonsS = createHint(0, height, FlxG.width, widthS, 0xFFFF00));
+			add(buttonS = createHint(0, height, FlxG.width, widthS, 0xFFFF00));
 			}
 		}
 
