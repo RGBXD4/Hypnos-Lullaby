@@ -885,14 +885,14 @@ class PlayState extends MusicBeatState
 		if (ClientPrefs.pussyMode)
 		addMobileControls(DEFAULT);
 		if (ClientPrefs.hellMode)
-		addMobileControl(SPACE);
+		addMobileControle(SPACE);
 		if (!ClientPrefs.pussyMode && !ClientPrefs.hellMode)
-		switch(SONG.song.ToLowerCase())
+		switch(SONG.song.toLowerCase())
 		{
-		case 'safety-lullaby' || 'left-unchecked':
-		addMobileControl(SPACE);
+		case 'safety-lullaby' | 'left-unchecked':
+		addMobileControls(SPACE);
 		default:
-		addMobileControl(DEFAULT);
+		addMobileControls(DEFAULT);
 		}
 		mobileControls.visible= true;
 		#end
