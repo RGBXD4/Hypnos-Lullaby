@@ -14,11 +14,11 @@ class MobileControls extends FlxSpriteGroup
 
 	public var hitbox:FlxHitbox;
 
-	public function new()
+	public function new(type:mobile.flixel.FlxHitbox.Modes = DEFAULT)
 	{
 		super();
 
-				hitbox = new FlxHitbox();
+				hitbox = new FlxHitbox(type);
 				add(hitbox);
 	}
 
