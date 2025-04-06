@@ -21,7 +21,7 @@ class FlxHitbox extends FlxSpriteGroup
 		var height = Std.int(FlxG.height * 0.8);
 		var colors = [0xFF00FF, 0x00FFFF, 0x00FF00, 0xFF0000];
 		var colorsS = [0xFF00FF, 0x00FFFF, 0x00FF00, 0xFF0000, 0xFFFF00];
-		switch(mode)
+		switch(modes)
 		{
 			case DEFAULT:
 			for (i in 0...4)
