@@ -32,7 +32,7 @@ class FlxHitbox extends FlxSpriteGroup
 			if (i ＜ 4)
 			add(buttons[i] = createHint(i * width, 0, width, height, colorsS[i]));
 			else
-			add(buttons[i] = createHint(0, height, FlxG.width, widthS, colors[i]));
+			add(buttons[i] = createHint(0, height, FlxG.width, widthS, colorsS[i]));
 		}
 
 		scrollFactor.set();
