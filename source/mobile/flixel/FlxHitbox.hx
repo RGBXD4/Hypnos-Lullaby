@@ -31,11 +31,11 @@ class FlxHitbox extends FlxSpriteGroup
 			//这一段我不会写呃，所以我用ai给我跑了个代码不知道能不能用...
 			if (i < 4)
 			{
-			buttons[i] = createHint(i * width, 0, width, height, colorsS[i]);
+			buttons = createHint(i * width, 0, width, height, colorsS[i]);
 			}
 			else
 			{
-			buttons[i] = createHint(0, height, FlxG.width, widthS, colorsS[i]);
+			buttons = createHint(0, height, FlxG.width, widthS, colorsS[i]);
 			}
 			add(buttons[i]);
 		}
