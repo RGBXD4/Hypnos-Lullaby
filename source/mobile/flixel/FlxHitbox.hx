@@ -12,18 +12,27 @@ class FlxHitbox extends FlxSpriteGroup
 {
 	public var buttons:Array<FlxButton> = [];
 
-	public function new()
+	public function new(modes:Modes)
 	{
 		super();
 
 		var width = Std.int(FlxG.width / 4);
+		var widthS = Std.int(FlxG.width / 5);
+		var height = Std.int(FlxG.height * 0.8);
 		var colors = [0xFF00FF, 0x00FFFF, 0x00FF00, 0xFF0000];
 		var colorsS = [0xFF00FF, 0x00FFFF, 0x00FF00, 0xFF0000, 0xFFFF00];
-		switch(PlaysState.Song.songToLowerCase())
+		switch(mode)
 		{
-		default:
-		for (i in 0...4)
+			case DEFAULT:
+			for (i in 0...4)
 			add(buttons[i] = createHint(i * width, 0, width, FlxG.height, colors[i]));
+			case SPACE:
+			for (i in 0...5)
+			//这一段我不会写呃，所以我用ai给我跑了个代码不知道能不能用...
+			if (i ＜ 4)
+			add(buttons[i] = createHint(i * width, 0, width, height, colorsS[i]));
+			else
+			add(buttons[i] = createHint(0, height, FlxG.width, widthS, colors[i]));
 		}
 
 		scrollFactor.set();
@@ -76,4 +85,9 @@ class FlxHitbox extends FlxSpriteGroup
 
 		return hint;
 	}
+}
+enum Modes
+{
+DEFAULT;
+SPACE;
 }
