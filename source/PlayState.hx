@@ -93,6 +93,8 @@ class PlayState extends MusicBeatState
 	public var GF_X:Float = 400;
 	public var GF_Y:Float = 130;
 
+	public var hitbox:FlxHitbox;
+
 	public var canHitPendulum:Bool = false;
 	public var hitPendulum:Bool = false;
 	public var boyfriendGroup:FlxSpriteGroup;
@@ -2364,7 +2366,7 @@ class PlayState extends MusicBeatState
 				} else {
 					boyfriend.idleSuffix = '';
 				}
-				if (FlxHitbox.buttons[4].justPressed && !inCutscene) {
+				if (hitbox.buttons[4].justPressed && !inCutscene) {
 					if (canHitPendulum) {
 						canHitPendulum = false;
 						hitPendulum = true;
