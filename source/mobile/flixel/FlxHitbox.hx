@@ -30,9 +30,9 @@ class FlxHitbox extends FlxSpriteGroup
 			for (i in 0...5)
 			//这一段我不会写呃，所以我用ai给我跑了个代码不知道能不能用...
 			if (i ＜ 4)
-			add(buttons[i] = createHint(i * width, 0, width, height, colorsS[i]));
+			{add(buttons[i] = createHint(i * width, 0, width, height, colorsS[i]));}
 			else
-			add(buttons[i] = createHint(0, height, FlxG.width, widthS, colorsS[i]));
+			{add(buttons[i] = createHint(0, height, FlxG.width, widthS, colorsS[i]));}
 		}
 
 		scrollFactor.set();
