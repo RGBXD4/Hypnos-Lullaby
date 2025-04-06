@@ -11,6 +11,7 @@ import flixel.tweens.FlxTween;
 class FlxHitbox extends FlxSpriteGroup
 {
 	public var buttons:Array<FlxButton> = [];
+	public var buttonS:FlxButton = new FlxButton(0, 0);
 
 	public function new(modes:Modes)
 	{
@@ -20,24 +21,17 @@ class FlxHitbox extends FlxSpriteGroup
 		var widthS = Std.int(FlxG.width / 5);
 		var height = Std.int(FlxG.height * 0.8);
 		var colors = [0xFF00FF, 0x00FFFF, 0x00FF00, 0xFF0000];
-		var colorsS = [0xFF00FF, 0x00FFFF, 0x00FF00, 0xFF0000, 0xFFFF00];
 		switch(modes)
 		{
 			case DEFAULT:
 			for (i in 0...4)
 			add(buttons[i] = createHint(i * width, 0, width, FlxG.height, colors[i]));
 			case SPACE:
-			for (i in 0...5)
-			//这一段我不会写呃，所以我用ai给我跑了个代码不知道能不能用...
-			if (i < 4)
-			{
-			buttons = createHint(i * width, 0, width, height, colorsS[i]);
+			for (i in 0...4)
+		        {
+			add(buttons[i] = createHint(i * width, 0, width, height, colors[i]));
+			add(buttonsS = createHint(0, height, FlxG.width, widthS, 0xFFFF00));
 			}
-			else
-			{
-			buttons = createHint(0, height, FlxG.width, widthS, colorsS[i]);
-			}
-			add(buttons[i]);
 		}
 
 		scrollFactor.set();
@@ -46,6 +40,7 @@ class FlxHitbox extends FlxSpriteGroup
 	override function destroy()
 	{
 		super.destroy();
+		buttonS = FlxDestroyUtil.destroy(buttonS);
 		for (button in buttons)
 			button = FlxDestroyUtil.destroy(button);
 	}
