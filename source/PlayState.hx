@@ -881,11 +881,21 @@ class PlayState extends MusicBeatState
 				camFollow.x = 510;
 				camFollow.y = 358;
 		} 
-		#if mobile
-		addMobileControls();
+				#if mobile
+		if (ClientPrefs.pussyMode)
+		addMobileControls(DEFAULT);
+		if (ClientPrefs.hellMode)
+		addMobileControl(SPACE);
+		if (!ClientPrefs.pussyMode && !ClientPrefs.hellMode)
+		switch(SONG.song.ToLowerCase())
+		{
+		case 'safety-lullaby' || 'left-unchecked':
+		addMobileControl(SPACE);
+		default:
+		addMobileControl(DEFAULT);
+		}
 		mobileControls.visible= true;
 		#end
-		
 	}
 
 	var jumpScare:FlxSprite;
