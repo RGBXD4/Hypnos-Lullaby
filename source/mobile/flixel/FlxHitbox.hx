@@ -18,8 +18,13 @@ class FlxHitbox extends FlxSpriteGroup
 
 		var width = Std.int(FlxG.width / 4);
 		var colors = [0xFF00FF, 0x00FFFF, 0x00FF00, 0xFF0000];
+		var colorsS = [0xFF00FF, 0x00FFFF, 0x00FF00, 0xFF0000, 0xFFFF00];
+		switch(PlaysState.Song.songToLowerCase())
+		{
+		default:
 		for (i in 0...4)
 			add(buttons[i] = createHint(i * width, 0, width, FlxG.height, colors[i]));
+		}
 
 		scrollFactor.set();
 	}
