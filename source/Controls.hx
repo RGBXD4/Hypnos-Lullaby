@@ -399,6 +399,13 @@ public function setHitBox(hitbox:FlxHitbox)
     inline forEachBound(Control.NOTE_LEFT, (action, state) -> addButtonNOTES(action, hitbox.buttons[0], state));
     inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addButtonNOTES(action, hitbox.buttons[3], state));
 }
+public function setHitBoxS(hitbox:FlxHitbox)
+{
+    inline forEachBound(Control.NOTE_UP, (action, state) -> addButtonNOTES(action, hitbox.buttons[2], state));
+    inline forEachBound(Control.NOTE_DOWN, (action, state) -> addButtonNOTES(action, hitbox.buttons[1], state));
+    inline forEachBound(Control.NOTE_LEFT, (action, state) -> addButtonNOTES(action, hitbox.buttons[0], state));
+    inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addButtonNOTES(action, hitbox.buttons[3], state));
+}
 public function removeFlxInput(Tinputs) {
 		for (action in this.digitalActions)
 		{
