@@ -50,7 +50,7 @@ import Achievements;
 import StageData;
 import FunkinLua;
 import DialogueBoxPsych;
-
+import mobile.flixel.FlxHitbox;
 #if sys
 import sys.FileSystem;
 #end
@@ -2364,7 +2364,7 @@ class PlayState extends MusicBeatState
 				} else {
 					boyfriend.idleSuffix = '';
 				}
-				if (FlxG.keys.justPressed.SPACE && !inCutscene) {
+				if (FlxHitbox.buttons[4].justPressed && !inCutscene) {
 					if (canHitPendulum) {
 						canHitPendulum = false;
 						hitPendulum = true;
