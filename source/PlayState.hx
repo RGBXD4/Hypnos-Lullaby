@@ -885,7 +885,7 @@ class PlayState extends MusicBeatState
 		if (ClientPrefs.pussyMode)
 		addMobileControls(DEFAULT);
 		if (ClientPrefs.hellMode)
-		addMobileControle(SPACE);
+		addMobileControls(SPACE);
 		if (!ClientPrefs.pussyMode && !ClientPrefs.hellMode)
 		switch(SONG.song.toLowerCase())
 		{
