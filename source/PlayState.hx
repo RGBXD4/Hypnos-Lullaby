@@ -897,14 +897,19 @@ class PlayState extends MusicBeatState
 		default:
 		addMobileControls(DEFAULT);
 		}
-		}else{
-		if (ClientPrefs.pussyMode)
+		}else if (ClientPrefs.pussyMode){
 		addMobileControls(DEFAULT);
-		}else{
-		if (ClientPrefs.hellMode)
+		}else if (ClientPrefs.hellMode){
 		addMobileControls(SPACE);
 		}
+		if (mobileControls != null)
+		{
 		mobileControls.visible= true;
+		}
+		else
+		{
+		trace("Failed!");
+		}
 		#end
 	}
 
