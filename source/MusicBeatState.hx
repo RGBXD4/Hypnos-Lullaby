@@ -35,7 +35,7 @@ class MusicBeatState extends FlxUIState
 		var mobileControls:MobileControls;
 		var trackedInputsMobileControls:Array<FlxActionInput> = [];
 
-		public function addMobileControls(type:mobile.flixel.FlxHitbox.Modes)
+		public function addMobileControls(type:mobile.flixel.FlxHitbox.Modes = DEFAULT)
 	        {
 			if (mobileControls != null)
 			removeMobileControls();
