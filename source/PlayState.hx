@@ -884,32 +884,20 @@ class PlayState extends MusicBeatState
 				camFollow.y = 358;
 		} 
 		#if mobile
-		var rgbXd:Bool = false;
-		if (!ClientPrefs.pussyMode && !ClientPrefs.hellMode)
-		rgbXd = true;
 				
-		if (rgbXd && mobileControls == null)
-		{
 		switch(SONG.song.toLowerCase())
 		{
 		case 'safety-lullaby' | 'left-unchecked':
+		if (ClientPrefs.pussyMode){
+		addMobileControls(DEFAULT);
+		}else if (ClientPrefs.hellMode)
 		addMobileControls(SPACE);
 		default:
 		addMobileControls(DEFAULT);
 		}
-		}else if (ClientPrefs.pussyMode){
-		addMobileControls(DEFAULT);
-		}else if (ClientPrefs.hellMode){
-		addMobileControls(SPACE);
-		}
+		
 		if (mobileControls != null)
-		{
 		mobileControls.visible= true;
-		}
-		else
-		{
-		trace("Failed!");
-		}
 		#end
 	}
 
