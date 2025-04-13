@@ -12,12 +12,13 @@ class FlxHitbox extends FlxSpriteGroup
 {
 	public var buttons:Array<FlxButton> = [];
 
+	public var buttonSpace:FlxButton = new FlxButton(0, 0);
+	
 	public function new(modes:Modes)
 	{
 		super();
 
 		var width = Std.int(FlxG.width / 4);
-		var widthS = Std.int(FlxG.width / 5);
 		var height = Std.int(FlxG.height * 0.8);
 		var colors = [0xFF00FF, 0x00FFFF, 0x00FF00, 0xFF0000];
 		switch(modes)
@@ -29,6 +30,7 @@ class FlxHitbox extends FlxSpriteGroup
 			for (i in 0...4) {
 		        add(buttons[i] = createHint(i * width, 0, width, height, colors[i]));
 			}
+			add(buttonS = createHint(0, (FlxG.height / 5) * 4, Std.int(FlxG.width), Std.int(FlxG.height / 5), 0xFFFF00));
 		}
 
 		scrollFactor.set();
@@ -37,6 +39,7 @@ class FlxHitbox extends FlxSpriteGroup
 	override function destroy()
 	{
 		super.destroy();
+		buttonS = FlxDestroyUtil.destroy(buttonS);
 		for (button in buttons)
 			button = FlxDestroyUtil.destroy(button);
 	}
