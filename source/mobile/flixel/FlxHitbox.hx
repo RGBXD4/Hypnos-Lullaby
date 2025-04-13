@@ -11,7 +11,6 @@ import flixel.tweens.FlxTween;
 class FlxHitbox extends FlxSpriteGroup
 {
 	public var buttons:Array<FlxButton> = [];
-	public var buttonS:FlxButton = new FlxButton(0, 0);
 
 	public function new(modes:Modes)
 	{
@@ -29,8 +28,7 @@ class FlxHitbox extends FlxSpriteGroup
 			case SPACE:
 			for (i in 0...4) {
 		        add(buttons[i] = createHint(i * width, 0, width, height, colors[i]));
-		        }
-                        add(buttonS = createHint(0, height, FlxG.width, widthS, 0xFFFF00));
+			}
 		}
 
 		scrollFactor.set();
@@ -39,7 +37,6 @@ class FlxHitbox extends FlxSpriteGroup
 	override function destroy()
 	{
 		super.destroy();
-		buttonS = FlxDestroyUtil.destroy(buttonS);
 		for (button in buttons)
 			button = FlxDestroyUtil.destroy(button);
 	}
