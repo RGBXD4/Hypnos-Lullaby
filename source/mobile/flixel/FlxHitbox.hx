@@ -12,7 +12,7 @@ class FlxHitbox extends FlxSpriteGroup
 {
 	public var buttons:Array<FlxButton> = [];
 
-	public var buttonSpace:FlxButton = new FlxButton(0, 0);
+	public var buttonS:FlxButton = new FlxButton(0, 0);
 	
 	public function new(modes:Modes)
 	{
