@@ -44,7 +44,7 @@ class MusicBeatState extends FlxUIState
                         {
 			case SPAEC:
 			controls.setHitBoxS(mobileControls.hitbox);
-			default:
+			case DEFAULT:
 			controls.setHitBox(mobileControls.hitbox);
 			}
 			trackedInputsMobileControls = controls.trackedInputsNOTES;
