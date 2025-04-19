@@ -402,20 +402,22 @@ trackedInputsNOTES.push(input);
 action.add(input);
 }
 
-public function setHitBox(hitbox:FlxHitbox)
+public function setHitBox(hitbox:FlxHitbox, modes:mobile.flixel.FlxHitbox.Modes = DEFAULT)
 {
+switch(modes)
+{
+case DEFAULT:
     inline forEachBound(Control.NOTE_UP, (action, state) -> addButtonNOTES(action, hitbox.buttons[2], state));
     inline forEachBound(Control.NOTE_DOWN, (action, state) -> addButtonNOTES(action, hitbox.buttons[1], state));
     inline forEachBound(Control.NOTE_LEFT, (action, state) -> addButtonNOTES(action, hitbox.buttons[0], state));
     inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addButtonNOTES(action, hitbox.buttons[3], state));
-}
-public function setHitBoxS(hitbox:FlxHitbox)
-{
-    inline forEachBound(Control.NOTE_UP, (action, state) -> addButtonNOTES(action, hitbox.buttons[2], state));
+case SPAEC:
+inline forEachBound(Control.NOTE_UP, (action, state) -> addButtonNOTES(action, hitbox.buttons[2], state));
     inline forEachBound(Control.NOTE_DOWN, (action, state) -> addButtonNOTES(action, hitbox.buttons[1], state));
     inline forEachBound(Control.NOTE_LEFT, (action, state) -> addButtonNOTES(action, hitbox.buttons[0], state));
     inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addButtonNOTES(action, hitbox.buttons[3], state));
     inline forEachBound(Control.DODGE, (action, state) -> addButtonNOTES(action, hitbox.buttonS, state));
+}
 }
 	
 public function removeFlxInput(Tinputs) {
