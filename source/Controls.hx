@@ -45,6 +45,7 @@ enum abstract Action(String) to String from String
 	var BACK = "back";
 	var PAUSE = "pause";
 	var RESET = "reset";
+	var DODGE = "dodge";
 }
 #else
 @:enum
@@ -78,6 +79,7 @@ abstract Action(String) to String from String
 	var BACK = "back";
 	var PAUSE = "pause";
 	var RESET = "reset";
+	var DODGE = "dodge";
 }
 #end
 
@@ -106,6 +108,7 @@ enum Control
 	ACCEPT;
 	BACK;
 	PAUSE;
+	DODGE;
 }
 
 enum KeyboardScheme
@@ -149,6 +152,7 @@ class Controls extends FlxActionSet
 	var _accept = new FlxActionDigital(Action.ACCEPT);
 	var _back = new FlxActionDigital(Action.BACK);
 	var _pause = new FlxActionDigital(Action.PAUSE);
+	var _dodge = new FlxActionDigital(Action.DODGE);
 	var _reset = new FlxActionDigital(Action.RESET);
 
 	#if (haxe >= "4.0.0")
@@ -299,6 +303,10 @@ class Controls extends FlxActionSet
 
 	inline function get_RESET()
 		return _reset.check();
+	public var DODGE(get, never):Bool;
+
+	inline function get_DODGE()
+		return _dodge.check();
 
 	#if (haxe >= "4.0.0")
 	public function new(name, scheme = None)
@@ -333,6 +341,7 @@ class Controls extends FlxActionSet
 		add(_back);
 		add(_pause);
 		add(_reset);
+		add(_dodge);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -372,7 +381,8 @@ class Controls extends FlxActionSet
 		add(_back);
 		add(_pause);
 		add(_reset);
-
+		add(_dodge);
+		
 		for (action in digitalActions)
 			byName[action.name] = action;
 			
@@ -399,6 +409,15 @@ public function setHitBox(hitbox:FlxHitbox)
     inline forEachBound(Control.NOTE_LEFT, (action, state) -> addButtonNOTES(action, hitbox.buttons[0], state));
     inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addButtonNOTES(action, hitbox.buttons[3], state));
 }
+public function setHitBoxS(hitbox:FlxHitbox)
+{
+    inline forEachBound(Control.NOTE_UP, (action, state) -> addButtonNOTES(action, hitbox.buttons[2], state));
+    inline forEachBound(Control.NOTE_DOWN, (action, state) -> addButtonNOTES(action, hitbox.buttons[1], state));
+    inline forEachBound(Control.NOTE_LEFT, (action, state) -> addButtonNOTES(action, hitbox.buttons[0], state));
+    inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addButtonNOTES(action, hitbox.buttons[3], state));
+    inline forEachBound(Control.DODGE, (action, state) -> addButtonNOTES(action, hitbox.buttonS, state));
+}
+	
 public function removeFlxInput(Tinputs) {
 		for (action in this.digitalActions)
 		{
@@ -464,6 +483,7 @@ public function removeFlxInput(Tinputs) {
 			case BACK: _back;
 			case PAUSE: _pause;
 			case RESET: _reset;
+			case DODGE: _dodge;
 		}
 	}
 
@@ -522,6 +542,8 @@ public function removeFlxInput(Tinputs) {
 			case PAUSE:
 				func(_pause, JUST_PRESSED);
 			case RESET:
+				func(_reset, JUST_PRESSED);
+			case DODGE:
 				func(_reset, JUST_PRESSED);
 		}
 	}
