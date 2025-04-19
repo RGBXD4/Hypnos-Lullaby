@@ -19,7 +19,6 @@ class FlxHitbox extends FlxSpriteGroup
 		super();
 
 		var width = Std.int(FlxG.width / 4);
-		var height = Std.int(FlxG.height * 0.8);
 		var colors = [0xFF00FF, 0x00FFFF, 0x00FF00, 0xFF0000];
 		switch(modes)
 		{
@@ -28,7 +27,7 @@ class FlxHitbox extends FlxSpriteGroup
 			add(buttons[i] = createHint(i * width, 0, width, FlxG.height, colors[i]));
 			case SPACE:
 			for (i in 0...4) {
-		        add(buttons[i] = createHint(i * width, 0, width, height, colors[i]));
+		        add(buttons[i] = createHint(i * width, 0, width, Std.int(FlxG.height * 0.8), colors[i]));
 			}
 			add(buttonS = createHint(0, (FlxG.height / 5) * 4, Std.int(FlxG.width), Std.int(FlxG.height / 5), 0xFFFF00));
 		}
