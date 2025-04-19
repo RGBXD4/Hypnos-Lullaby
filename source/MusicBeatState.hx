@@ -40,7 +40,13 @@ class MusicBeatState extends FlxUIState
 			if (mobileControls != null)
 			removeMobileControls();
 			mobileControls = new MobileControls();
-                        controls.setHitBox(mobileControls.hitbox);
+			switch(type)
+                        {
+			case SPAEC:
+			controls.setHitBoxS(mobileControls.hitbox);
+			default:
+			controls.setHitBox(mobileControls.hitbox);
+			}
 			trackedInputsMobileControls = controls.trackedInputsNOTES;
 			controls.trackedInputsNOTES = [];
 
