@@ -165,7 +165,7 @@ class MainMenuState extends MusicBeatState
 	{
 		// colorTest += 0.125;
 		// bg.color = FlxColor.fromHSB(colorTest, 100, 100, 0.5);
-		if (controls.UI_RIGHT)
+		if (controls.UI_RIGHT || (FlxG.mouse.overlaps(rightArrow, FlxG.camera) && FlxG.mouse.justPressed)
 			rightArrow.animation.play('press')
 		else
 			rightArrow.animation.play('idle');
