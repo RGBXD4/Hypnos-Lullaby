@@ -2367,7 +2367,7 @@ class PlayState extends MusicBeatState
 				} else {
 					boyfriend.idleSuffix = '';
 				}
-				if (hitbox.buttonS.justPressed && !inCutscene) {
+				if (Controls.DODGE && !inCutscene) {
 					if (canHitPendulum) {
 						canHitPendulum = false;
 						hitPendulum = true;
